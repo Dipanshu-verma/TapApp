@@ -136,22 +136,7 @@ const TapMe: React.FC = () => {
         </span>
         <div className="user-level">Level {level}</div>
       </div>
-      <motion.button
-        className="tap-button"
-        onClick={handleTap}
-        whileTap={{ scale: 0.9 }}
-        style={{ backgroundImage: `url(${coinImage})` }}
-      >
-        {bubbles.map((bubble) => (
-          <span
-            key={bubble.id}
-            className="bubble"
-            style={{ left: bubble.x, top: bubble.y }}
-          >
-            +1
-          </span>
-        ))}
-      </motion.button>  <motion.button
+       <motion.button
         className="tap-button"
         onClick={handleTap}
         whileTap={{ scale: 0.9 }}
@@ -169,7 +154,7 @@ const TapMe: React.FC = () => {
       </motion.button>
       <div className="progress-info">
         <MdFlashOn className="lightning-icon" />
-        <span className="progress-text">{progress}/2000</span>
+        <span className="progress-text">{progress}/100</span>
       </div>
       <div className="progress-bar">
         <div className="progress-fill" style={{ width: `${progress}%` }}></div>
