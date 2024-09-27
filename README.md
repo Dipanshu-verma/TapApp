@@ -1,6 +1,9 @@
+
 # TapMe - Telegram Clicker Game
 
 TapMe is a Telegram-integrated clicker game where users earn coins by tapping a button. The project comprises a frontend built with React.js, a backend using Node.js with GraphQL-Yoga and Supabase, and a Telegram bot that manages user interactions.
+
+**[Tap here to interact with the bot](https://t.me/Co2Dipanshubot)**
 
 ## Project Structure
 
@@ -40,14 +43,14 @@ Ensure the following are installed before you begin:
 ```plaintext
 SUPABASE_URL=your-supabase-url
 SUPABASE_KEY=your-supabase-key
+```
 
 ### Bot (`bot/.env`)
-```plaintext
 
+```plaintext
 BOT_TOKEN=your-telegram-bot-token
 FRONTEND_URL=your-frontend-url
 BACKEND_URL=your-backend-url
-
-
+```
 
 This README provides comprehensive instructions on setting up, running, and configuring the TapMe project, including obtaining necessary credentials and deploying the components. Let me know if you need further adjustments or details!
