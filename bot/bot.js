@@ -1,24 +1,37 @@
 import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
-import fetch from 'node-fetch';  
+import fetch from 'node-fetch';
+import express from 'express';
 
 dotenv.config();
 
-const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true });
+ 
+const bot = new TelegramBot(process.env.BOT_TOKEN);
 
  
 const FRONTEND_URL = process.env.FRONTEND_URL;
-const BACKEND_URL =  process.env.BACKEND_URL
+const BACKEND_URL = process.env.BACKEND_URL;
+
+const app = express();
+app.use(express.json());  
+
+ 
+bot.setWebHook(`${process.env.WEBHOOK_URL}/bot${process.env.BOT_TOKEN}`);
+
+ 
+app.post(`/bot${process.env.BOT_TOKEN}`, (req, res) => {
+  bot.processUpdate(req.body);  
+  res.sendStatus(200);   
+});
+ 
 bot.onText(/\/start/, async (msg) => {
   const chatId = msg.chat.id;
   const username = msg.from.username || `User${msg.from.id}`;
   console.log(username, "username from bot");
 
- 
   bot.sendMessage(chatId, `Welcome to TapMe, ${username}! Ready to start playing?`);
 
   try {
-   
     bot.sendMessage(chatId, 'Tap to Play', {
       reply_markup: {
         inline_keyboard: [
@@ -39,13 +52,11 @@ bot.onText(/\/start/, async (msg) => {
   }
 });
 
- 
 bot.onText(/\/balance/, async (msg) => {
   const chatId = msg.chat.id;
   const username = msg.from.username || `User${msg.from.id}`;
 
   try {
-  
     const response = await fetch(`${BACKEND_URL}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -75,7 +86,6 @@ bot.onText(/\/balance/, async (msg) => {
   }
 });
 
- 
 bot.onText(/\/help/, (msg) => {
   const chatId = msg.chat.id;
 
@@ -89,4 +99,14 @@ To start playing, just tap the button and watch your coins grow. Happy tapping!
   `;
 
   bot.sendMessage(chatId, helpMessage);
+});
+ 
+app.get('/', (req, res) => {
+  res.send('Telegram bot is running!');
+});
+
+ 
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
