@@ -51,6 +51,8 @@ SUPABASE_KEY=your-supabase-key
 BOT_TOKEN=your-telegram-bot-token
 FRONTEND_URL=your-frontend-url
 BACKEND_URL=your-backend-url
+WEBHOOK_URL=your-bot-server-url
+PORT=your-server-Port
 ```
 
 This README provides comprehensive instructions on setting up, running, and configuring the TapMe project, including obtaining necessary credentials and deploying the components. Let me know if you need further adjustments or details!

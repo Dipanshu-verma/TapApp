@@ -9,7 +9,6 @@ import { MdFlashOn } from "react-icons/md";
 import Loader from './Loader';
 import ErrorDisplay from './ErrorDisplay';
 
-// GraphQL queries and mutations
 const GET_USER = gql`
   query GetUser($username: String!) {
     getUser(username: $username) {
